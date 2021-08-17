@@ -11,10 +11,18 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 ## Responses by department
 
-```{r echo=FALSE}
+```{r echo=FALSE, warnings=FALSE}
 
-"---chart to go here---"
+library(magrittr)
 
+department_table <- data.frame(table(departments))
+
+plot <- plot_freqs(department_table, xlab = "Number of respondents", ylab = "Department", n = sum(department_table[2]), font_size = 14, height = 400 + 50 * nrow(department_table))
+
+table <- kableExtra::kable_styling(knitr::kable(department_table)) %>% 
+  kableExtra::add_footnote(paste0("Sample size = ", sum(department_table[2]))) 
+
+carsurvey2::wrap_outputs("coding-freq", plot, table)
 
 ```
 
