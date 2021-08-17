@@ -1,0 +1,57 @@
+body {
+  font-size: 16px;
+}
+
+h1, h2 {
+  padding-top: 3em !important;
+  font-weight: 550;
+}
+
+h3, h4 {
+  padding-top: 4em !important;
+  font-weight: 550;
+}
+
+.title {
+  padding-top: 0 !important;
+}
+
+body {
+  font-size: 16px;
+}
+
+.navbar-fixed-top {
+  background-color: #004556;
+}
+
+.navbar-brand {
+  color: white !important;
+}
+
+.navbar-header {
+  font-size: 18px;
+}
+
+p > a {
+  text-decoration: underline; 
+}
+
+p > a:focus {
+  background-color: #ffdd00 !important;
+  border-bottom: 4px solid black !important;
+  color: black !important;
+}
+
+ol > li > a {
+  text-decoration: underline; 
+}
+
+ol > li > a:focus {
+  background-color: #ffdd00 !important;
+  border-bottom: 4px solid black !important;
+  color: black !important;
+}
+
+.plotly.html-widget {
+  max-width: 100%;
+}
