@@ -1,3 +1,21 @@
+#'@title Ingest department data
+#'
+#'@description get department data from the smartcurvey API. 
+#'
+#'@return department column from CARS wave 3 data (character).
+#'
+
+ingest_department_data <- function() {
+  
+  export_id <- get_latest_export_id(get_export_list())  
+  data <- convert_raw(ingest(export = export_id))
+  
+  # Discard top 2 rows as these are blank
+  departments <- data$Q1..Which.department.do.you.primarily.work.in.[3:length(data$Q1..Which.department.do.you.primarily.work.in.)]
+  
+  return(departments)
+}
+
 #'@title Ingest smartsurvey data
 #'
 #'@description Download smartsurvey export via the API. Download the exported data from smartsurvey using the API. Use convert_raw() to convert the API response to a data.frame.
