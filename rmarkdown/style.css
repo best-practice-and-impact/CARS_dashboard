@@ -42,6 +42,16 @@ p > a:focus {
   color: black !important;
 }
 
+.toggle-button {
+  text-decoration: underline; 
+}
+
+.toggle-button:focus {
+  background-color: #ffdd00 !important;
+  border-bottom: 4px solid black !important;
+  color: black !important;
+}
+
 ol > li > a {
   text-decoration: underline; 
 }
