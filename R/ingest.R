@@ -89,3 +89,62 @@ convert_raw <- function(r) {
   
   return(data)
 }
+
+#'@title get list of exports
+#'#'
+#'@description retrieve a list of data exports of the CARS wave 3 data
+#'
+#'@param survey survey number (string)
+#'@param token API token. This should be stored as an environment variable and NOT kept in this repository. The function will retrieve the token from the environment variable.
+#'@param secret API secret. This should be stored as an environment variable and NOT kept in this repository. The function will retrieve the token from the environment variable.
+#'
+#'@return API request
+#'
+
+get_export_list <- function(survey = "961613", token = Sys.getenv("CARS_TOKEN"), secret = Sys.getenv("CARS_SECRET")) {
+  
+  # API request
+  url <- paste0("https://api.smartsurvey.io/v1/surveys/", survey, "/exports/") 
+  
+  query_string <- list(
+    api_token = token,
+    api_token_secret = secret
+  )
+  
+  tryCatch(
+    {
+      r <- httr::GET(
+        url, 
+        query = query_string
+      )    
+    },
+    error = function(e) {
+      stop(paste("Error in API request: ", e))
+    }
+  )
+  
+  return(r)
+}
+
+#'@title get latest export ID
+#'
+#'@description Retrieve the latest export's ID from the export list
+#'
+#'@param r API request object returned by get_export_list
+#'
+#'@return export ID (string)
+#'
+
+get_latest_export_id <- function(r) {
+  
+  if (r$status_code != 200) {
+    stop(paste0("Unsuccessful API request - status code: ", r$status_code, "."))
+  }
+  
+  export_list <- XML::xmlParse(rawToChar(r$content))
+  export_list <- XML::xmlToList(export_list)
+  latest_dataset_id <- export_list[1]$exports$Id
+  
+  return(latest_dataset_id)
+  
+}
