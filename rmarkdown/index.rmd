@@ -5,27 +5,42 @@ output:
     css: "style.css"
 ---
 
-## Welcome
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-## Responses by department
-
 ```{r echo=FALSE, warnings=FALSE}
 
 library(magrittr)
 
 department_table <- data.frame(table(departments))
 
-plot <- plot_freqs(department_table, xlab = "Number of respondents", ylab = "Department", n = sum(department_table[2]), font_size = 14, height = 400 + 50 * nrow(department_table))
+n_responses <- length(departments)
 
-table <- kableExtra::kable_styling(knitr::kable(department_table)) %>% 
-  kableExtra::add_footnote(paste0("Sample size = ", sum(department_table[2]))) 
+```
 
-carsurvey2::wrap_outputs("coding-freq", plot, table)
+## Welcome
+
+Welcome to the Coding in Analysis and Research Survey (CARS) wave 3 dashboard. Here you can see our response rate so far, broken down by department. CARS is our annual survey on the use of code in government analysis. You can see the results of wave 2 in our [online publication](https://best-practice-and-impact.github.io/CARS-2/). 
+
+Like in the previous 2 years, we hope to get over 1,000 responses. So far, we've got `r n_responses` responses. We're aiming for at least 20 from as many departments as possible, which will allow us to produce customised reports for those departments. If you're interested in seeing this, please promote the survey in your department.
+
+
+## Responses by department
+
+```{r echo=FALSE, warnings=FALSE}
+
+if (nrow(department_table) == 0) {
+  knitr::raw_html("There aren't enough responses yet. Please check later - this page will update once per hour.")
+} else {
+  colnames(department_table) <- c("Department", "Number of respondents")
+
+  plot <- plot_freqs(department_table, xlab = "Department", ylab = "Number of respondents", n = n_responses, font_size = 14, height = 400 + 50 * nrow(department_table))
+  
+  table <- kableExtra::kable_styling(knitr::kable(department_table)) %>% 
+    kableExtra::add_footnote(paste0("Sample size = ",n_responses)) 
+  
+  carsurvey2::wrap_outputs("coding-freq", plot, table)
+}
 
 ```
 
 ## Can't see your department?
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+If your department isn't listed here, that means we have fewer than 5 responses. Once we get to that number of responses, you'll be able to see it listed.

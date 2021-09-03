@@ -15,7 +15,7 @@
 #'
 #'@export
 
-plot_freqs <- function(table, xlab, ylab, bar_colour = "#004556", n, font_size = 12, break_q_names_col = NULL, max_lines = 2, ...) {
+plot_freqs <- function(table, xlab, ylab, bar_colour = "#004556", n, font_size = 12, ...) {
   
   # Validate table
   if (!is.data.frame(table)) {
@@ -41,15 +41,7 @@ plot_freqs <- function(table, xlab, ylab, bar_colour = "#004556", n, font_size =
     stop("Unexpected input - font_size is not numeric.")
   }
   
-  # Apply break_q_names to a column
-  if(!is.null(break_q_names_col)) {
-    # Coerce to character type
-    table[[break_q_names_col]] <- as.character(table[[break_q_names_col]])
-    
-    table[[break_q_names_col]] <- break_q_names(table[[break_q_names_col]], max_lines = max_lines)
-    
-    table[[break_q_names_col]] <- factor(table[[break_q_names_col]], levels = table[[break_q_names_col]])
-  }
+  table[1] <- break_q_names(as.character(table[[1]]))
   
   x <- list(
     title = xlab,
@@ -99,9 +91,11 @@ plot_freqs <- function(table, xlab, ylab, bar_colour = "#004556", n, font_size =
                         hoverlabel = list(bgcolor = "white", font = list(size = font_size)),
                         annotations = list(x = 1, y = 0, text = paste0("Sample size = ", n), 
                                            showarrow = F, xanchor='right', yanchor='auto', xshift=0, yshift=-100,
-                                           xref='paper', yref='paper', font=list(size = font_size),
-                        shapes = line)
+                                           xref='paper', yref='paper', font=list(size = font_size)),
+                        shapes = line
   )
+  
+  fig <- plotly::layout(fig, annotations = create_y_lab(ylab, font_size))
   
   return(fig)
   
@@ -132,4 +126,33 @@ break_q_names <- function(q_names, max_lines = 2) {
   wrapped_strings <- gsub(regex , "\\1<br>\\2", q_names)
   
   return(wrapped_strings)
+}
+
+
+
+#'@title Create custom Y axis label
+#'
+#'@description Create a custom y axis label (plotly annotation). This label is placed just above the y axis
+#' and is horizontal, to replace the vertically flipped label produced by default. 
+#'
+#'@param ylab Y axis label
+#'@param font_size font size used in the chart. This function will return a slightly larger font.
+#'
+#'@return list of parameters for plotly annotation
+#'
+#'@export
+
+create_y_lab <- function(ylab, font_size) {
+  annotation <- list(text = ylab, # Custom Y axis label 
+                     y = 1,
+                     x = "min",
+                     showarrow = FALSE, 
+                     yshift = 30,
+                     xref = "paper",
+                     yref = "paper",
+                     font = list(size = font_size * 1.2)
+  )
+  
+  return(annotation)
+  
 }
