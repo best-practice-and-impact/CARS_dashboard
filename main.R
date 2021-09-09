@@ -4,7 +4,7 @@ source("R/plot.R")
 
 departments <- remove_low_counts(ingest_department_data())
 
-rmarkdown::render("rmarkdown/index.rmd", output_file = "../html/index.html")
+rmarkdown::render("rmarkdown/index.rmd", output_file = "../docs/index.html")
 
 gert::git_branch_checkout("main")
 gert::git_add("main.R")
