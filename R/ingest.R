@@ -11,7 +11,7 @@ ingest_department_data <- function() {
   data <- convert_raw(ingest(export = export_id))
   
   # Discard top 2 rows as these are blank
-  departments <- data$Q1..What.is.your.civil.service.grade..if.applicable..[3:length(data$Q1..What.is.your.civil.service.grade..if.applicable..)]
+  departments <- data$Q2..Which.department.do.you.primarily.work.in.[3:length(data$Q2..Which.department.do.you.primarily.work.in.)]
   
   return(departments)
 }
