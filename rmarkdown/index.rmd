@@ -9,9 +9,10 @@ output:
 
 library(magrittr)
 
-department_table <- data.frame(table(departments))
-
+departments <- ingest_department_data()
 n_responses <- length(departments)
+
+department_table <- data.frame(table(remove_low_counts(departments)))
 
 ```
 
