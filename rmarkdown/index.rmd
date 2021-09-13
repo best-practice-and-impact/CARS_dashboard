@@ -5,7 +5,7 @@ output:
     css: "style.css"
 ---
 
-```{r echo=FALSE, warnings=FALSE}
+```{r echo=FALSE, warning=FALSE}
 
 library(magrittr)
 
