@@ -32,7 +32,7 @@ if (nrow(department_table) == 0) {
 } else {
   colnames(department_table) <- c("Department", "Number of respondents")
 
-  plot <- plot_freqs(department_table, xlab = "Department", ylab = "Number of respondents", n = n_responses, font_size = 14, height = 400 + 50 * nrow(department_table))
+  plot <- plot_freqs(department_table, xlab = "Department", ylab = "Number of respondents", n = n_responses, font_size = 14, height = 400 + 50 * nrow(department_table), width = 800)
   
   table <- kableExtra::kable_styling(knitr::kable(department_table)) %>% 
     kableExtra::add_footnote(paste0("Sample size = ",n_responses)) 
