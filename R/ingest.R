@@ -29,7 +29,7 @@ ingest_department_data <- function() {
 #'
 #'@export
 
-ingest <- function(survey = "961613",
+ingest <- function(survey = "1167489",
                    export,
                    token = Sys.getenv("CARS_TOKEN"),
                    secret = Sys.getenv("CARS_SECRET")) {
@@ -50,16 +50,13 @@ ingest <- function(survey = "961613",
   # API request
   url <- paste0("https://api.smartsurvey.io/v1/surveys/", survey, "/exports/", export, "/download")
   
-  query_string <- list(
-    api_token = token,
-    api_token_secret = secret
-  )
+  auth <- httr::authenticate(user = token, password = secret, type = "basic")
   
   tryCatch(
     {
       r <- httr::GET(
         url, 
-        query = query_string
+        query = auth
       )    
     },
     error = function(e) {
@@ -109,7 +106,7 @@ convert_raw <- function(r) {
 }
 
 #'@title get list of exports
-#'#'
+#'
 #'@description retrieve a list of data exports of the CARS wave 3 data
 #'
 #'@param survey survey number (string)
@@ -124,16 +121,14 @@ get_export_list <- function(survey = "961613", token = Sys.getenv("CARS_TOKEN"),
   # API request
   url <- paste0("https://api.smartsurvey.io/v1/surveys/", survey, "/exports/") 
   
-  query_string <- list(
-    api_token = token,
-    api_token_secret = secret
-  )
+  auth <- httr::authenticate(user = token, password = secret, type = "basic")
+  
   
   tryCatch(
     {
       r <- httr::GET(
         url, 
-        query = query_string
+        query = auth
       )    
     },
     error = function(e) {
@@ -144,16 +139,17 @@ get_export_list <- function(survey = "961613", token = Sys.getenv("CARS_TOKEN"),
   return(r)
 }
 
-#'@title get latest export ID
+#'@title get CSV export ID
 #'
 #'@description Retrieve the latest export's ID from the export list
 #'
 #'@param r API request object returned by get_export_list
+#'@param export_n desired export index (1 = latest export, 2 = previous export, etc.). Defaults to 1.
 #'
 #'@return export ID (string)
 #'
 
-get_latest_export_id <- function(r) {
+get_export_id <- function(r, export_n) {
   
   if (r$status_code != 200) {
     stop(paste0("Unsuccessful API request - status code: ", r$status_code, "."))
@@ -161,7 +157,7 @@ get_latest_export_id <- function(r) {
   
   export_list <- XML::xmlParse(rawToChar(r$content))
   export_list <- XML::xmlToList(export_list)
-  latest_dataset_id <- export_list[1]$exports$Id
+  latest_dataset_id <- export_list[export_n]$exports$Id
   
   return(latest_dataset_id)
   
