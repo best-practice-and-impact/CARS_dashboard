@@ -7,11 +7,11 @@
 
 ingest_department_data <- function() {
   
-  export_id <- get_latest_export_id(get_export_list())  
+  export_id <- get_export_id(get_export_list())  
   data <- convert_raw(ingest(export = export_id))
   
   # Discard top 2 rows as these are blank
-  departments <- data$Q2..Which.department.do.you.primarily.work.in.[3:length(data$Q2..Which.department.do.you.primarily.work.in.)]
+  departments <- data$Q3..Which.department.do.you.primarily.work.in.[3:length(data$Q3..Which.department.do.you.primarily.work.in.)]
   
   return(departments)
 }
@@ -56,7 +56,7 @@ ingest <- function(survey = "1167489",
     {
       r <- httr::GET(
         url, 
-        query = auth
+        auth
       )    
     },
     error = function(e) {
@@ -116,7 +116,7 @@ convert_raw <- function(r) {
 #'@return API request
 #'
 
-get_export_list <- function(survey = "961613", token = Sys.getenv("CARS_TOKEN"), secret = Sys.getenv("CARS_SECRET")) {
+get_export_list <- function(survey = "1167489", token = Sys.getenv("CARS_TOKEN"), secret = Sys.getenv("CARS_SECRET")) {
   
   # API request
   url <- paste0("https://api.smartsurvey.io/v1/surveys/", survey, "/exports/") 
@@ -128,7 +128,7 @@ get_export_list <- function(survey = "961613", token = Sys.getenv("CARS_TOKEN"),
     {
       r <- httr::GET(
         url, 
-        query = auth
+        auth
       )    
     },
     error = function(e) {
