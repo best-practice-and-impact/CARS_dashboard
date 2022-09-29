@@ -18,9 +18,9 @@ department_table <- data.frame(table(remove_low_counts(departments)))
 
 ## Welcome
 
-Welcome to the Coding in Analysis and Research Survey (CARS) wave 3 dashboard. Here you can see our response rate so far, broken down by department. CARS is our annual survey on the use of code in government analysis. You can see the results of wave 2 in our [online publication](https://best-practice-and-impact.github.io/CARS-2/). 
+Welcome to the Coding in Analysis and Research Survey (CARS) 2022 dashboard. Here you can see our response rate so far, broken down by department. CARS is our annual survey on the use of code in government analysis. You can see the 2021 results in our [online publication](https://best-practice-and-impact.github.io/CARS-3/). 
 
-Like in the previous 2 years, we hope to get over 1,000 responses. So far, we've got `r n_responses` responses. We're aiming for at least 20 from as many departments as possible, which will allow us to produce customised reports for those departments. If you're interested in seeing this, please promote the survey in your department.
+This year we hope to get over 1,000 responses. So far, we've got `r n_responses` responses. We're aiming for at least 20 from as many departments as possible, which will allow us to create customised reports for those departments. If you're interested in seeing this, please promote the survey in your department.
 
 
 ## Responses by department
