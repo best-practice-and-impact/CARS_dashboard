@@ -57,7 +57,7 @@ convert_raw <- function(r) {
 #' @description Download smartsurvey export via the API. Download the exported data from smartsurvey using the API. Use convert_raw() to convert the API response to a data.frame.
 #' Note: the first API request in a session will typically fail.
 #'
-#' @param survey the survey ID (character string/numeric). Defaults to "1167489".
+#' @param survey the survey ID (character string/numeric). Defaults to "1376897".
 #' @param token the API token (character string). Loaded from environment variable by default.
 #' @param secret the secret API token (character string). Loaded from environment variable by default.
 #' @param proxies proxy addresses (string). Loads from the user environment by default. Expects a string in the format "ip.address:port; alt.ip.address:port".
@@ -65,7 +65,7 @@ convert_raw <- function(r) {
 
 #' @return the exported data as a dataframe
 
-ingest <- function(survey = "1167489",
+ingest <- function(survey = "1376897",
                    token = Sys.getenv("CARS_TOKEN"),
                    secret = Sys.getenv("CARS_SECRET"),
                    proxies = Sys.getenv("alt_proxy"),

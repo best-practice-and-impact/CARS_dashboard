@@ -13,7 +13,7 @@ data <- get_tidy_data_api()
 department <- filter_divisons(data)
 n_responses <- length(department)
 
-department_table <- data.frame(table(remove_low_counts(departments)))
+department_table <- data.frame(table(remove_low_counts(department)))
 
 ```
 
