@@ -14,3 +14,21 @@ remove_low_counts <- function(departments) {
   
   return(filtered_departments)
 }
+
+
+#' @title Filter data to divisons
+#'
+#' @description Take full data set and filter to only ONS divsions
+#'
+#' @param data full dataset
+#'
+#' @return filtered CARS dataset
+#'
+#' @export
+
+filter_divisons <- function(data) {
+  
+  departments <- data$Q3..Which.department.do.you.primarily.work.in.[3:length(data$Q3..Which.department.do.you.primarily.work.in.)]
+  
+  return(departments)
+}
