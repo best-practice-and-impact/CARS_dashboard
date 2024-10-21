@@ -9,6 +9,7 @@ output:
 
 library(magrittr)
 
+
 data <- get_tidy_data_api()
 department <- filter_divisons(data)
 n_responses <- length(department)
@@ -19,9 +20,9 @@ department_table <- data.frame(table(remove_low_counts(department)))
 
 ## Welcome
 
-Welcome to the Coding in Analysis and Research Survey (CARS) 2023 dashboard. Here you can see our response rate so far, broken down by department. CARS is our annual survey on the use of code in government analysis. You can see the 2022 results in our [online publication](https://best-practice-and-impact.github.io/CARS/). 
+Welcome to the Coding in Analysis and Research Survey (CARS) 2024 dashboard. Here you can see the response rate so far, broken down by department. CARS is our annual survey on the use of code in government analysis. You can see the 2023 results in our [online publication](https://best-practice-and-impact.github.io/CARS/). 
 
-This year we hope to get over 1,500 responses. So far, we've got `r n_responses` responses. We're aiming for at least 20 from as many departments as possible, which will allow us to create customised reports for those departments. If you're interested in seeing this, please promote the survey in your department.
+This year we hope to get over 1,500 responses. So far, we've got `r n_responses` responses. We're aiming for at least 20 responses from as many departments as possible, which will allow us to create customised reports for those departments. If you're interested in seeing this, please promote the survey in your department.
 
 
 ## Responses by department
@@ -29,7 +30,7 @@ This year we hope to get over 1,500 responses. So far, we've got `r n_responses`
 ```{r echo=FALSE, warnings=FALSE}
 
 if (nrow(department_table) == 0) {
-  knitr::raw_html("There aren't enough responses yet. Please check later - this page will update once per hour.")
+  knitr::raw_html("There aren't enough responses yet. Please check back later.")
 } else {
   colnames(department_table) <- c("Department", "Number of respondents")
 
