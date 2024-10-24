@@ -28,7 +28,7 @@ remove_low_counts <- function(departments) {
 
 filter_divisons <- function(data) {
   
-  departments <- data$Q3..Which.department.do.you.primarily.work.in.[3:length(data$Q3..Which.department.do.you.primarily.work.in.)]
+  departments <- data$Q3..Which.Civil.Service.department.do.you.primarily.work.in.[3:length(data$Q3..Which.Civil.Service.department.do.you.primarily.work.in.)]
   
   return(departments)
 }
