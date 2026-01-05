@@ -1,9 +1,14 @@
 ---
-title: "Coding in analysis and research response dashboard"
+title: "CARS response dashboard"
 output: 
   html_document: 
     css: "style.css"
 ---
+```{r, echo=FALSE}
+htmltools::img(src = knitr::image_uri("./af-logo.png"), 
+               alt = 'logo', 
+               style = 'position:absolute; top:0; right:0; padding:60px;')
+```
 
 ```{r echo=FALSE, warning=FALSE}
 
@@ -20,9 +25,11 @@ department_table <- data.frame(table(remove_low_counts(department)))
 
 ## Welcome
 
-Welcome to the Coding in Analysis and Research Survey (CARS) 2024 dashboard. Here you can see the response rate so far, broken down by department. CARS is our annual survey on the use of code in government analysis. You can see the 2023 results in our [online publication](https://best-practice-and-impact.github.io/CARS/). 
+Welcome to the Coding in Analysis and Research Survey (CARS) 2026 dashboard. Here you can see the response rate by department.  
 
-This year we hope to get over 1,500 responses. So far, we've got `r n_responses` responses. We're aiming for at least 20 responses from as many departments as possible, which will allow us to create customised reports for those departments. If you're interested in seeing this, please promote the survey in your department.
+CARS is our annual survey on the use of code in government analysis. You can see the previous results in our [online publication](https://best-practice-and-impact.github.io/CARS/). 
+
+This year we hope to get over 1,500 responses. So far, we've got `r n_responses` responses. We will create a customised report for departments where we receive over 20 responses. If you're interested in seeing this, please promote the survey in your department.
 
 
 ## Responses by department

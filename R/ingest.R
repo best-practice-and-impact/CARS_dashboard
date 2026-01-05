@@ -65,7 +65,7 @@ convert_raw <- function(r) {
 
 #' @return the exported data as a dataframe
 
-ingest <- function(survey = "1574027",
+ingest <- function(survey = "1761271",
                    token = Sys.getenv("CARS_TOKEN"),
                    secret = Sys.getenv("CARS_SECRET"),
                    proxies = Sys.getenv("alt_proxy"),
@@ -89,7 +89,7 @@ ingest <- function(survey = "1574027",
   }
   
   # API request
-  url <- paste0("https://api.smartsurvey.io/v1/surveys/", survey, "/exports/", export, "/download")
+  url <- paste0("https://api.smartsurvey.io/v2/surveys/", survey, "/exports/", export, "/download")
   
   if (!is.null(proxies)) {
     proxy_list <- stringr::str_split(proxies, ";")[[1]]
