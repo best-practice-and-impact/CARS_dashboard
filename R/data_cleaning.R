@@ -28,7 +28,10 @@ remove_low_counts <- function(departments) {
 
 filter_divisons <- function(data) {
   
+  data$Q3..Which.Civil.Service.department.do.you.primarily.work.in.[data$X== "National Records of Scotland"] <- "National Records of Scotland"
   departments <- data$Q3..Which.Civil.Service.department.do.you.primarily.work.in.[3:length(data$Q3..Which.Civil.Service.department.do.you.primarily.work.in.)]
   
   return(departments)
 }
+
+
